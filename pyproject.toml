@@ -110,8 +110,6 @@ skip-checking-short-docstrings = false
 # be removed.
 baseline = ".pydoclint_baseline.txt"
 
-
-
 [tool.typos.default]
 locale = 'en-gb'
 extend-ignore-re = [
