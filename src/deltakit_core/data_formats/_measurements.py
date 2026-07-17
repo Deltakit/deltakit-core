@@ -1,4 +1,4 @@
-# (c) Copyright Riverlane 2020-2025.
+# (c) Copyright Riverlane 2020-2026. All rights reserved.
 import csv
 from collections.abc import Iterable, Iterator
 from itertools import cycle
