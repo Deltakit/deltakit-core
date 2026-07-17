@@ -12,7 +12,7 @@ def random_generator():
 
 @pytest.fixture(scope="session")
 def git_root():
-    return Path(__file__).parent.parent.parent
+    return Path(__file__).parent.parent
 
 
 @pytest.fixture(scope="session")
