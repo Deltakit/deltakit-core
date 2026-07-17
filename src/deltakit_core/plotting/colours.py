@@ -1,3 +1,4 @@
+# (c) Copyright Riverlane 2020-2026. All rights reserved.
 from enum import Enum
 from typing import Final
 
