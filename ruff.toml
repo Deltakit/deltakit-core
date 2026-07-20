@@ -1,27 +1,149 @@
-# Linting configuration for deltakit_explorer.
+# Linting configuration for deltakit-core.
 #
 # General and format configurations are repository-wide for the moment.
-extend = "../ruff.toml"
+# Repository-wide Ruff configuration.
+#
+# Should only contain project-wide configuration.
+#
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".github",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pixi",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+    "*.ipynb",
+    "_version.py",
+]
+
+# Only include source code and tests.
 include = ["src/deltakit_core/**/*.py", "tests/**/*.py"]
+
+# Same as Black.
+line-length = 88
+indent-width = 4
+
+# Assume Python 3.10
+target-version = "py310"
+
+[lint]
+preview = true
+explicit-preview-rules = true
+select = [
+    "A",
+    "ARG",
+    "B",
+    "C4",
+    "E",
+    "EM",
+    "EXE",
+    "F",
+    "FURB",
+    "G",
+    "I",
+    "ICN",
+    "N",
+    "NPY",
+    "PD",
+    "PGH",
+    "PIE",
+    "PL",
+    "PT",
+    "PTH",
+    "PYI",
+    "RET",
+    "RUF",
+    "SIM",
+    "T",
+    "UP",
+    "W",
+    "YTT",
+    # Explicit preview rules
+    "CPY001",
+]
+ignore = [
+    # Having an explicit argument to open() for the open mode is nice.
+    "UP015",
+]
 
 # Specific per-file ignores
 [lint.per-file-ignores]
 "tests/**/*.py" = [
-    # Magic constants in tests are not an urgent issue.
-    # This ignore might introduce bugs if a constant changes (e.g. if "Not found"
-    # becomes error 405 instead of error 404) and not all occurrences are changed
-    # accordingly. That is deemed to be sufficiently improbable to still ignore this
-    # error.
+    # Magic constants in tests are not an urgent issue.
+    # This ignore might introduce bugs if a constant changes (e.g. if "Not found"
+    # becomes error 405 instead of error 404) and not all occurrences are changed
+    # accordingly. That is deemed to be sufficiently improbable to still ignore this
+    # error.
     "PLR2004",
-    # Some tests have long function names which exceeds the line length limit in order
-    # to be descriptive. That is fine, so ignoring the respective errors.
-    # This ignore is only about naming and so should not introduce any bug in the future
-    # by ignoring warnings that could prevent those bugs.
+    # Some tests have long function names which exceeds the line length limit in order
+    # to be descriptive. That is fine, so ignoring the respective errors.
+    # This ignore is only about naming and so should not introduce any bug in the future
+    # by ignoring warnings that could prevent those bugs.
     "E501",
-    # Temporary ignore.
+    # Temporary ignore.
     "RUF043",
+    # Tests don't need copyright notices
+    "CPY001",
 ]
+
 # Some test names/arguments are not strictly using camel_case as they contain some
-# capitalised letters. This is not an issue as most of the time this casing helps
-# with the readability.
+# capitalised letters. This is not an issue as most of the time this casing helps
+# with the readability.
 "tests/unit/decoding_graphs/test_parsing_dem_to_graphs.py" = ["N802", "N803"]
+
+[lint.flake8-copyright]
+# Ruff configuration for enforcing copyright notices (https://docs.astral.sh/ruff/rules/missing-copyright-notice/)
+# We are enforcing the style presented in https://riverlane.atlassian.net/wiki/x/VgBJhg
+notice-rgx = "(?i)\\(c\\) Copyright Riverlane \\d{4}-2026. All rights reserved."
+# Avoid enforcing a header on empty (<10 bytes) files
+min-file-size = 10
+
+[format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+#
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = true
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+#
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = "dynamic"

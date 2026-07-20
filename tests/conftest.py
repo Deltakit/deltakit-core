@@ -1,4 +1,4 @@
-# (c) Copyright Riverlane 2020-2025.
+# (c) Copyright Riverlane 2020-2026. All rights reserved.
 from pathlib import Path
 
 import numpy as np
@@ -12,7 +12,7 @@ def random_generator():
 
 @pytest.fixture(scope="session")
 def git_root():
-    return Path(__file__).parent.parent.parent
+    return Path(__file__).parent.parent
 
 
 @pytest.fixture(scope="session")

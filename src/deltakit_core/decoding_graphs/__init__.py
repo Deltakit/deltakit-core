@@ -1,4 +1,4 @@
-# (c) Copyright Riverlane 2020-2025.
+# (c) Copyright Riverlane 2020-2026. All rights reserved.
 """
 Sub-package for defining decoding graphs and related data types; these structures are
 used by many decoders to define their understanding of the code and noise model being

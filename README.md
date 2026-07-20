@@ -1,3 +1,5 @@
+# Deltakit (component `deltakit-core`)
+
 [![docs - here!][docs-badge]][docs-link]
 [![PyPI][pypi-badge]][pypi-link]
 [![Python versions][python-badge]][pypi-link]
