@@ -35,7 +35,7 @@ classifiers = [
 dependencies = [
   "packaging >=25.0, <27",
   "requests>=2.32.0,<3.0",
-  "tomlkit>=0.13<0.16",
+  "tomlkit>=0.13,<0.16",
   "numpy>=1.26",
   "numpy~=2.1; python_version >= '3.13'",
   "networkx~=3.1",
