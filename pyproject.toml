@@ -151,4 +151,7 @@ CPY = "CPY"                       # A ruff rule identifier
 
 [tool.typos.files]
 # Paths/patterns to exclude from spell checking
-extend-exclude = ["**/LICENSE", "**/*.html"]
+extend-exclude = [
+  "**/LICENSE",
+  "**/*.html",
+]
