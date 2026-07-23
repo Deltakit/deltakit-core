@@ -53,7 +53,7 @@ if __name__ == "__main__":
     prerelease_version = f"{version.major}.{version.minor}.{version.micro + 1}"
     data["project"]["version"] = (
         prerelease_version +
-        f".dev{timestamp_version_suffix}+g{commit_version_suffix}"
+        f".dev{timestamp_version_suffix}.g{commit_version_suffix}"
     )
 
     # Write updated data to file
