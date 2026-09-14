@@ -78,8 +78,8 @@ def weighted_nodes_within_radius(
         If ``radius`` is negative, or if growth reaches an edge whose weight is
         negative. ``EdgeRecord.weight`` is ``log((1 - p_err) / p_err)``, so an
         error mechanism with ``p_err > 0.5`` weighs less than nothing and the
-        shortest path is no longer well defined. Refusing is better than
-        returning a set that quietly depends on visit order.
+        shortest path is no longer well defined (depends on visit order).
+        Refusing is better than returning a set that quietly depends on visit order.
 
     Notes
     -----
