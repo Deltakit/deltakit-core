@@ -8,10 +8,9 @@ import warnings
 from collections import Counter
 from collections.abc import Iterable, Iterator
 from itertools import chain, zip_longest
-from typing import Generic, Protocol, TypeVar, cast
+from typing import Generic, Protocol, Self, TypeVar, cast
 
 import deltakit_stim as stim
-from typing_extensions import Self
 
 from deltakit_core.decoding_graphs._data_qubits import (
     DecodingEdge,
