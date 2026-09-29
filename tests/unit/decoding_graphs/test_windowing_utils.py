@@ -235,6 +235,14 @@ class TestWeightedNodesWithinRadius:
         two_cheap = 2 * EdgeRecord(p_err=cheap).weight
         assert two_cheap < EdgeRecord(p_err=dear).weight
         assert weighted_nodes_within_radius(hg, {0}, two_cheap) == {0, 1, 3}
+        # Raising the budget to the expensive direct edge reaches 3 by that edge
+        # too (the boundary reached == radius holds), but adds no node: 1 stays
+        # cheap to reach, so the set is still {0, 1, 3}.
+        assert weighted_nodes_within_radius(hg, {0}, EdgeRecord(p_err=dear).weight) == {
+            0,
+            1,
+            3,
+        }
 
     def test_an_impossible_error_mechanism_is_infinitely_far(self) -> None:
         # A default EdgeRecord has p_err of 0, so its weight is infinite. No
