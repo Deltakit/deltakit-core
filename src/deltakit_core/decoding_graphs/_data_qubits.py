@@ -17,9 +17,7 @@ from collections.abc import (
 )
 from functools import cached_property
 from itertools import chain
-from typing import Any, Generic, TypeVar
-
-from typing_extensions import overload
+from typing import Any, Generic, TypeVar, overload
 
 from deltakit_core.decoding_graphs._syndromes import (
     Bit,

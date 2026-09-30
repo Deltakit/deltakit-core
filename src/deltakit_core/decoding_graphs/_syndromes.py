@@ -16,10 +16,9 @@ from collections.abc import (
 )
 from functools import cached_property
 from itertools import chain, repeat
-from typing import Any, Literal, SupportsIndex, cast, overload
+from typing import Any, Literal, Self, SupportsIndex, cast, overload
 
 import numpy as np
-from typing_extensions import Self
 
 Bit = Literal[0, 1]
 
