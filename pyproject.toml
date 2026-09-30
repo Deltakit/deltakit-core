@@ -7,7 +7,7 @@ name = "deltakit-core"
 version = "0.9.1"
 description = "Deltakit (component deltakit-core)"
 readme = "README.md"
-requires-python = ">=3.10,<3.16"
+requires-python = ">=3.11,<3.16"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
 
@@ -21,7 +21,6 @@ classifiers = [
   "Programming Language :: Python",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -40,7 +39,6 @@ dependencies = [
   "numpy>=2.3.2,<3; python_version >= '3.14'",
   "networkx~=3.1",
   "deltakit-stim>=0.2.1,<0.3",
-  "typing_extensions~=4.0",
 ]
 
 

@@ -18,7 +18,7 @@ from collections.abc import (
 )
 from dataclasses import dataclass
 from functools import cached_property
-from itertools import chain, tee
+from itertools import chain, pairwise
 from typing import Any, ClassVar, Generic, TypeGuard, TypeVar, cast
 
 import networkx as nx
@@ -613,10 +613,10 @@ class NXGraph(HyperMultiGraph[AnyEdgeT], Generic[NXGraphT, AnyEdgeT]):
         edges.
         """
         # pylint: disable=too-many-function-args
-        # in Python 3.10 use pairwise here
-        firsts, seconds = tee(nx.shortest_path(self._graph, origin, destination))
-        next(seconds)
-        return [DecodingEdge(u, v) for u, v in zip(firsts, seconds, strict=False)]
+        return [
+            DecodingEdge(u, v)
+            for u, v in pairwise(nx.shortest_path(self._graph, origin, destination))
+        ]
 
     def shortest_path_length(self, origin: int, destination: int) -> float:
         """Find the length of the shortest path between two syndrome bits."""
@@ -630,12 +630,12 @@ class NXGraph(HyperMultiGraph[AnyEdgeT], Generic[NXGraphT, AnyEdgeT]):
         If origin or destination are boundaries, an exception will be raised.
         """
         # pylint: disable=too-many-function-args
-        # in Python 3.10 use pairwise here
-        firsts, seconds = tee(
-            nx.shortest_path(self.no_boundary_view, origin, destination)
-        )
-        next(seconds)
-        return [DecodingEdge(*edge) for edge in zip(firsts, seconds, strict=False)]
+        return [
+            DecodingEdge(u, v)
+            for u, v in pairwise(
+                nx.shortest_path(self.no_boundary_view, origin, destination)
+            )
+        ]
 
     def shortest_path_length_no_boundaries(
         self, origin: int, destination: int
