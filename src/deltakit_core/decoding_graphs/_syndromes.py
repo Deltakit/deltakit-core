@@ -433,8 +433,10 @@ class Bitstring:
         if isinstance(index, int):
             return cast(Literal[0, 1], (self._bits >> index) & 1)
         if isinstance(index, slice):
-            start, stop, _ = index.indices(len(self))
-            mask = (1 << (stop - start)) - 1
+            start, stop, step = index.indices(len(self))
+            if step != 1:
+                return Bitstring.from_bits(list(self)[index])
+            mask = (1 << max(stop - start, 0)) - 1
             return Bitstring((self._bits >> start) & mask)
         msg = f"Bitstring indices must be integers or slices, not {type(index)}"
         raise TypeError(msg)
@@ -570,10 +572,15 @@ class FixedWidthBitstring(Bitstring):
         if isinstance(index, int):
             return cast(Literal[0, 1], (self._bits >> index) & 1)
         if isinstance(index, slice):
-            start, stop, _ = index.indices(len(self))
-            mask = (1 << (stop - start)) - 1
+            start, stop, step = index.indices(len(self))
+            if step != 1:
+                bits = list(self)[index]
+                return FixedWidthBitstring(
+                    width=len(bits), value=int(Bitstring.from_bits(bits))
+                )
+            width = max(stop - start, 0)
             return FixedWidthBitstring(
-                width=stop - start, value=(self._bits >> start) & mask
+                width=width, value=(self._bits >> start) & ((1 << width) - 1)
             )
         msg = f"Bitstring indices must be integers or slices, not {type(index)}"
         raise TypeError(msg)

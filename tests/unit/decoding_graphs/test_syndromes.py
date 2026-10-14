@@ -402,6 +402,22 @@ class TestBitstringDunderMethods:
         assert bitstring[:6] == Bitstring(0b010001)
         assert bitstring[:4] == Bitstring(0b0001)
 
+    @pytest.mark.parametrize(
+        "index",
+        [
+            slice(None, None, 2),
+            slice(1, None, 2),
+            slice(None, None, 3),
+            slice(None, None, -1),
+            slice(6, 1, -2),
+            slice(3, 1),
+            slice(2, 2),
+        ],
+    )
+    def test_slicing_bitstring_matches_slicing_the_list_of_bits(self, index):
+        bitstring = Bitstring(0b10010101101010)
+        assert bitstring[index] == Bitstring.from_bits(list(bitstring)[index])
+
     def test_interpreting_bitstring_returns_correct_integer(self):
         int_ = 0b1010100010110100101
         assert int(Bitstring(int_)) == int_
@@ -611,6 +627,29 @@ class TestFixedWidthBitstringDunderMethods:
     def test_slicing_bitstring_out_of_range_is_clipped(self):
         bitstring = FixedWidthBitstring(width=4, value=0b0110)
         assert bitstring[0:6] == FixedWidthBitstring(width=4, value=0b0110)
+
+    @pytest.mark.parametrize(
+        "index",
+        [
+            slice(None, None, 2),
+            slice(1, None, 2),
+            slice(None, None, 3),
+            slice(None, None, -1),
+            slice(6, 1, -2),
+        ],
+    )
+    def test_slicing_bitstring_with_a_step_matches_slicing_the_list_of_bits(
+        self, index
+    ):
+        bitstring = FixedWidthBitstring(width=10, value=0b0101000101)
+        sliced = bitstring[index]
+        assert list(sliced) == list(bitstring)[index]
+        assert len(sliced) == len(list(bitstring)[index])
+
+    @pytest.mark.parametrize("index", [slice(3, 1), slice(2, 2)])
+    def test_empty_slice_of_fixed_width_bitstring_raises_a_clear_error(self, index):
+        with pytest.raises(ValueError, match="Width of bitstring must be greater"):
+            FixedWidthBitstring(width=10, value=0b0101000101)[index]
 
 
 class TestFixedWidthBitstringMethods:
