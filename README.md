@@ -54,3 +54,12 @@ in exploring new ways to implement QEC logic all the way to running complex
 QEC circuits on QPU hardware.
 
 This package, `deltakit-core`, is a component package of Deltakit; please see [Deltakit](https://pypi.org/project/deltakit/) for more information.
+
+## Development
+
+`deltakit-core` provides shortcuts for common development tasks via [`just`](https://github.com/casey/just) (e.g., `just check`, `just lint`, `just test`, `just build`). Run `just --list` to view all available commands:
+
+```sh
+just --list
+```
+
